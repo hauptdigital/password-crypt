@@ -5,15 +5,27 @@ function get() {
   try {
     const data = fs.readFileSync('./db.json', 'utf8');
     const db = JSON.parse(data);
-    console.log(db[key]);
-    return db[key];
+    return db;
   } catch (err) {
     console.error(err);
   }
 }
 
 function set() {
-  console.log('called SET', key, value);
+  try {
+    const db = get();
+    db[key] = value;
+    const data = fs.writeFileSync('./db.json', JSON.stringify(db, null, 2));
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+  console.log(
+    '\nline      .-.\nline     (o.o)\nline      |=|\nline     __|__\nline   //.=|=.\\\nline  // .=|=. \\\nline  \\ .=|=. // \nline   \\(_=_)// \nline    (:| |:)\nline     || ||\nline     () ()\nline     || ||\nline     || ||\nline    ==   ==\nline'
+  );
+
+  console.log('called SET with', key, value);
+  console.log('New', key, 'is', value);
 }
 
 if (command === 'get') {
