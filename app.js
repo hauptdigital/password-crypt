@@ -1,10 +1,14 @@
 const { get, set, unset, reset } = require('./lib/commands');
 const [command, key] = process.argv.slice(2);
 const { askForPassword, askForMasterPassword } = require('./lib/questions');
-const { readMasterPassword } = require('./lib/database');
+const { readMasterPassword, connect } = require('./lib/database');
 const { verifyHash } = require('./lib/crypto');
 
 async function run() {
+  if (command === 'connect') {
+    connect();
+  }
+  /*
   if (command === 'reset') {
     const newMasterPassword = await askForMasterPassword();
     reset(newMasterPassword);
@@ -30,7 +34,7 @@ async function run() {
     unset(key);
   } else {
     console.log('Unknown command');
-  }
+  }*/
 }
 
 run();
