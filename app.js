@@ -1,12 +1,12 @@
 const { get, set, unset, reset } = require('./lib/commands');
 const [command, key] = process.argv.slice(2);
 const { askForPassword, askForMasterPassword } = require('./lib/questions');
-const { readMasterPassword, connect } = require('./lib/database');
+const { readMasterPassword, connectToMongoDB } = require('./lib/database');
 const { verifyHash } = require('./lib/crypto');
 
 async function run() {
   if (command === 'connect') {
-    connect();
+    connectToMongoDB();
   }
   /*
   if (command === 'reset') {
